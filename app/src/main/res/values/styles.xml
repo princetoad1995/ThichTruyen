@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:background">@color/colorTextGray</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
+
 </resources>
