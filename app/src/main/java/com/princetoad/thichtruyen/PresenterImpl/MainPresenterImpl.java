@@ -25,21 +25,44 @@ public class MainPresenterImpl implements MainPresenter{
     }
 
     @Override
-    public void getListTruyen() {
+    public void getListTruyen(int type) {
         view.showLoadingDialog("Đang tải dữ liệu");
-        service.getTruyenByTheloai(1, new ListDataCallback<TruyenDTO>() {
+        service.getTruyenByTheloai(type, view.getPage(), new ListDataCallback<TruyenDTO>() {
             @Override
             public void onSuccess(List<TruyenDTO> data) {
                 Log.e("size", data.size() + "");
-                view.setUrl(data.get(1).getAnhbia());
+                view.setListBook(data);
                 view.hideLoadingDialog();
             }
 
             @Override
             public void onFail(String error) {
                 Log.e("Loi", error);
+                view.hideLoadingDialog();
             }
         });
     }
+
+    @Override
+    public void loadMoreList() {
+        view.showLoadingDialog("Đang tải dữ liệu");
+        service.getTruyenByTheloai(1, view.getPage(), new ListDataCallback<TruyenDTO>() {
+            @Override
+            public void onSuccess(List<TruyenDTO> data) {
+                Log.e("size", data.size() + "");
+                if (data.size() > 0){
+                    view.setMoreListBook(data);
+                }
+                view.hideLoadingDialog();
+            }
+
+            @Override
+            public void onFail(String error) {
+                Log.e("Loi", error);
+                view.hideLoadingDialog();
+            }
+        });
+    }
+
 
 }

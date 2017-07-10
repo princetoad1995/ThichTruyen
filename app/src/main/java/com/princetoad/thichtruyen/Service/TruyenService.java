@@ -1,5 +1,6 @@
 package com.princetoad.thichtruyen.Service;
 
+import com.princetoad.thichtruyen.Common.Domain.ContentDTO;
 import com.princetoad.thichtruyen.Common.Domain.TruyenDTO;
 import com.princetoad.thichtruyen.ServiceCallback.ListDataCallback;
 
@@ -8,5 +9,6 @@ import com.princetoad.thichtruyen.ServiceCallback.ListDataCallback;
  */
 
 public interface TruyenService {
-    public void getTruyenByTheloai(int theloai, ListDataCallback<TruyenDTO> callback);
+    public void getTruyenByTheloai(int theloai, int page, ListDataCallback<TruyenDTO> callback);
+    public void getContentByTruyen(int idTruyen, int page, ListDataCallback<ContentDTO> callback);
 }

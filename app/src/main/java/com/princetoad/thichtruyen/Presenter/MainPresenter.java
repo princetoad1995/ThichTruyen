@@ -9,5 +9,6 @@ import java.util.List;
  */
 
 public interface MainPresenter {
-    public void getListTruyen();
+    public void getListTruyen(int type);
+    public void loadMoreList();
 }

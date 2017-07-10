@@ -18,4 +18,19 @@ public class Constant {
         public static final int NO_CONTENT = 204;
         public static final String CONNECT_ERROR = "Lỗi kết nối, vui lòng kiểm tra kết nối mạng và thử lại sau";
     }
+
+    public static class TYPE {
+        public static final int NGONTINH = 1;
+        public static final int TEEN = 2;
+        public static final int XUYENKHONG = 3;
+        public static final int DAMMY = 4;
+        public static final int VOZ = 5;
+        public static final int KIEMHIEP = 6;
+        public static final int SACHIEP = 7;
+        public static final int NGAN = 8;
+        public static final int DOTHI = 9;
+        public static final int TRINHTHAM = 10;
+        public static final int THAMKIN = 11;
+        public static final int KINHDI = 12;
+    }
 }
