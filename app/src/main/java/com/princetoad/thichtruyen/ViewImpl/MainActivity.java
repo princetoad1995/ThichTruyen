@@ -7,6 +7,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,7 +36,8 @@ public class MainActivity extends BaseActivity
     private ListView list_book;
     private CustomListBook adapter;
     private final static String TAG = MainActivity.class.getSimpleName();
-    private int pageCount = 1, type = Constant.TYPE.NGONTINH;
+    private int pageCount = 1, type = Constant.TYPE.NGONTINH, kt = 0;
+    private SwipeRefreshLayout mRefeshTruyen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +47,21 @@ public class MainActivity extends BaseActivity
         setSupportActionBar(toolbar);
 
         list_book = (ListView) findViewById(R.id.list_book);
+        mRefeshTruyen = (SwipeRefreshLayout) findViewById(R.id.refesh_list_truyen);
+        mRefeshTruyen.setColorScheme(android.R.color.holo_blue_dark,
+                android.R.color.holo_blue_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_green_light);
         controller = new MainPresenterImpl(MainActivity.this);
         controller.getListTruyen(type);
         list_book.setOnScrollListener(onScrollListener());
+        mRefeshTruyen.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                kt = 1;
+                resetPage(type);
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -77,14 +91,10 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.ngontinh) {
             resetPage(Constant.TYPE.NGONTINH);
-            controller.getListTruyen(type);
-
         } else if (id == R.id.teen) {
             resetPage(Constant.TYPE.TEEN);
-            controller.getListTruyen(type);
         } else if (id == R.id.voz) {
             resetPage(Constant.TYPE.VOZ);
-            controller.getListTruyen(type);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -144,9 +154,14 @@ public class MainActivity extends BaseActivity
     }
 
     private void resetPage(int type){
+        this.type = type;
         pageCount = 1;
         controller.resetLoadMore();
         truyenDTOList.clear();
-        this.type = type;
+        controller.getListTruyen(type);
+        if (kt == 1){
+            mRefeshTruyen.setRefreshing(false);
+            kt = 0;
+        }
     }
 }

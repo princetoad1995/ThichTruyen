@@ -18,7 +18,7 @@ import java.util.List;
  * Created by PRINCETOAD on 10/07/2017.
  */
 
-public class CustomListBook extends BaseAdapter{
+public class CustomListBook extends BaseAdapter {
     private List<TruyenDTO> list;
     private Context context;
     private LayoutInflater layoutInflater;
@@ -52,12 +52,15 @@ public class CustomListBook extends BaseAdapter{
         TextView author_book = (TextView) view.findViewById(R.id.author_book);
         TextView like_book = (TextView) view.findViewById(R.id.like_book);
 
-        TruyenDTO truyenDTO = list.get(i);
+        // fix issue list = 0
+        if (list.size() > 0) {
+            TruyenDTO truyenDTO = list.get(i);
 
-        Picasso.with(context).load(truyenDTO.getAnhbia()).into(avatar_book);
-        name_book.setText(truyenDTO.getTen());
-        author_book.setText("Tác giả : " + truyenDTO.getTacgia());
-        like_book.setText("Số lượt thích : " + truyenDTO.getYeuthich());
+            Picasso.with(context).load(truyenDTO.getAnhbia()).into(avatar_book);
+            name_book.setText(truyenDTO.getTen());
+            author_book.setText("Tác giả : " + truyenDTO.getTacgia());
+            like_book.setText("Số lượt thích : " + truyenDTO.getYeuthich());
+        }
 
         return view;
     }
