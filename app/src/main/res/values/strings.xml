@@ -9,4 +9,17 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    
+    <string name="ngontinh">Truyện ngôn tình</string>
+    <string name="teen">Truyện teen</string>
+    <string name="xuyenkhong">Xuyên không</string>
+    <string name="dammy">Đam mỹ</string>
+    <string name="voz">Truyện voz</string>
+    <string name="kiemhiep">Truyện kiếm hiệp</string>
+    <string name="ngan">Truyện ngắn</string>
+    <string name="dothi">Đô thị</string>
+    <string name="trinhtham">Trinh thám</string>
+    <string name="thamkin">Chuyện thầm kín</string>
+    <string name="kinhdi">Truyện kinh dị</string>
+    <string name="sachiep">Truyện sắc hiệp</string>
 </resources>

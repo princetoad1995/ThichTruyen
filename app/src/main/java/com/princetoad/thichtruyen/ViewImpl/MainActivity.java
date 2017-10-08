@@ -75,19 +75,16 @@ public class MainActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-            controller.getListTruyen(Constant.TYPE.NGONTINH);
-        } else if (id == R.id.nav_gallery) {
-            controller.getListTruyen(Constant.TYPE.TEEN);
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.ngontinh) {
+            resetPage(Constant.TYPE.NGONTINH);
+            controller.getListTruyen(type);
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.teen) {
+            resetPage(Constant.TYPE.TEEN);
+            controller.getListTruyen(type);
+        } else if (id == R.id.voz) {
+            resetPage(Constant.TYPE.VOZ);
+            controller.getListTruyen(type);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -95,8 +92,8 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
-    private AbsListView.OnScrollListener onScrollListener(){
-        return new AbsListView.OnScrollListener(){
+    private AbsListView.OnScrollListener onScrollListener() {
+        return new AbsListView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
@@ -107,8 +104,10 @@ public class MainActivity extends BaseActivity
                     if (list_book.getLastVisiblePosition() >= count - threshold) {
                         Log.e(TAG, "loading more data");
                         // Execute LoadMoreDataTask AsyncTask
-                        controller.loadMoreList();
-                        pageCount++;
+                        if (controller.isLoadMore()) {
+                            pageCount++;
+                            controller.loadMoreList();
+                        }
                     }
                 }
             }
@@ -142,5 +141,12 @@ public class MainActivity extends BaseActivity
     @Override
     public int getType() {
         return type;
+    }
+
+    private void resetPage(int type){
+        pageCount = 1;
+        controller.resetLoadMore();
+        truyenDTOList.clear();
+        this.type = type;
     }
 }

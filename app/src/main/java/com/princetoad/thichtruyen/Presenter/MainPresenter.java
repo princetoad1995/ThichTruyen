@@ -11,4 +11,6 @@ import java.util.List;
 public interface MainPresenter {
     public void getListTruyen(int type);
     public void loadMoreList();
+    public boolean isLoadMore();
+    public void resetLoadMore();
 }

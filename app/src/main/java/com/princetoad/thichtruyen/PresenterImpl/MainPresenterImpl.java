@@ -18,10 +18,12 @@ import java.util.List;
 public class MainPresenterImpl implements MainPresenter{
     private MainView view;
     private TruyenService service;
+    private boolean mIsLoadMore;
 
     public MainPresenterImpl(MainView view) {
         this.view = view;
         service = TruyenServiceImpl.getInstance();
+        mIsLoadMore = true;
     }
 
     @Override
@@ -46,12 +48,15 @@ public class MainPresenterImpl implements MainPresenter{
     @Override
     public void loadMoreList() {
         view.showLoadingDialog("Đang tải dữ liệu");
-        service.getTruyenByTheloai(1, view.getPage(), new ListDataCallback<TruyenDTO>() {
+        Log.d("type", view.getType() + "");
+        service.getTruyenByTheloai(view.getType(), view.getPage(), new ListDataCallback<TruyenDTO>() {
             @Override
             public void onSuccess(List<TruyenDTO> data) {
                 Log.e("size", data.size() + "");
                 if (data.size() > 0){
                     view.setMoreListBook(data);
+                } else {
+                    mIsLoadMore = false;
                 }
                 view.hideLoadingDialog();
             }
@@ -62,6 +67,16 @@ public class MainPresenterImpl implements MainPresenter{
                 view.hideLoadingDialog();
             }
         });
+    }
+
+    @Override
+    public boolean isLoadMore() {
+        return mIsLoadMore;
+    }
+
+    @Override
+    public void resetLoadMore() {
+        mIsLoadMore = true;
     }
 
 
