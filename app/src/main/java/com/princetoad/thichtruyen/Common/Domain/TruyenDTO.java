@@ -23,6 +23,10 @@ public class TruyenDTO extends BaseDTO implements Serializable{
     private String anhbia;
     @SerializedName("yeuthich")
     private int yeuthich;
+    @SerializedName("luotxem")
+    private int luotxem;
+    @SerializedName("mota")
+    private String mota;
 
     public TruyenDTO() {
     }
@@ -81,5 +85,21 @@ public class TruyenDTO extends BaseDTO implements Serializable{
 
     public void setYeuthich(int yeuthich) {
         this.yeuthich = yeuthich;
+    }
+
+    public int getLuotxem() {
+        return luotxem;
+    }
+
+    public void setLuotxem(int luotxem) {
+        this.luotxem = luotxem;
+    }
+
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
     }
 }

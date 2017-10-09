@@ -1,6 +1,7 @@
 package com.princetoad.thichtruyen.Common.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,12 @@ import java.util.List;
  * Created by PRINCETOAD on 10/07/2017.
  */
 
-public class CustomListBook extends BaseAdapter {
+public class AdapterListBook extends BaseAdapter {
     private List<TruyenDTO> list;
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public CustomListBook(List<TruyenDTO> list, Context context) {
+    public AdapterListBook(List<TruyenDTO> list, Context context) {
         this.list = list;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
@@ -55,11 +56,11 @@ public class CustomListBook extends BaseAdapter {
         // fix issue list = 0
         if (list.size() > 0) {
             TruyenDTO truyenDTO = list.get(i);
-
+            Log.d("list size", list.size() + "");
             Picasso.with(context).load(truyenDTO.getAnhbia()).into(avatar_book);
             name_book.setText(truyenDTO.getTen());
             author_book.setText("Tác giả : " + truyenDTO.getTacgia());
-            like_book.setText("Số lượt thích : " + truyenDTO.getYeuthich());
+            like_book.setText("Like : " + truyenDTO.getYeuthich() + "| Lượt xem : " + truyenDTO.getLuotxem());
         }
 
         return view;

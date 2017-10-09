@@ -5,10 +5,11 @@ package com.princetoad.thichtruyen.Common;
  */
 
 public class Constant {
+    public static final String BOOK = "truyen";
     public static class RETROFIT {
         public static final String BASE_URL = "http://truyenvoz.esy.es";
-        public static final int READ_TIME_OUT = 50;
-        public static final int CONNECT_TIME_OUT = 50;
+        public static final int READ_TIME_OUT = 100;
+        public static final int CONNECT_TIME_OUT = 100;
     }
 
     public static class ERROR {

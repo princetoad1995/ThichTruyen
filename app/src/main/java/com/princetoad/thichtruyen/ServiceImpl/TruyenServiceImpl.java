@@ -7,6 +7,7 @@ import com.princetoad.thichtruyen.Common.Domain.ContentDTO;
 import com.princetoad.thichtruyen.Common.Domain.TruyenDTO;
 import com.princetoad.thichtruyen.Common.RetrofitRequest;
 import com.princetoad.thichtruyen.Service.TruyenService;
+import com.princetoad.thichtruyen.ServiceCallback.DataCallback;
 import com.princetoad.thichtruyen.ServiceCallback.ListDataCallback;
 import com.princetoad.thichtruyen.ServiceRequest.TruyenRequest;
 
@@ -61,10 +62,10 @@ public class TruyenServiceImpl implements TruyenService{
     }
 
     @Override
-    public void getContentByTruyen(int idTruyen, int page, final ListDataCallback<ContentDTO> callback) {
-        request.getListContentByTruyen(idTruyen, page).enqueue(new Callback<List<ContentDTO>>() {
+    public void getContentByTruyen(int idTruyen, int idChap, final DataCallback<ContentDTO> callback) {
+        request.getListContentByTruyen(idTruyen, idChap).enqueue(new Callback<ContentDTO>() {
             @Override
-            public void onResponse(Call<List<ContentDTO>> call, Response<List<ContentDTO>> response) {
+            public void onResponse(Call<ContentDTO> call, Response<ContentDTO> response) {
                 if (response.isSuccessful()){
                     callback.onSuccess(response.body());
                 } else {
@@ -78,7 +79,7 @@ public class TruyenServiceImpl implements TruyenService{
             }
 
             @Override
-            public void onFailure(Call<List<ContentDTO>> call, Throwable t) {
+            public void onFailure(Call<ContentDTO> call, Throwable t) {
                 callback.onFail(Constant.ERROR.CONNECT_ERROR);
                 t.printStackTrace();
             }

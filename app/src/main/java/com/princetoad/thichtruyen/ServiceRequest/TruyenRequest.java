@@ -18,5 +18,5 @@ public interface TruyenRequest {
     @POST("/listTruyen.php?")
     Call<List<TruyenDTO>> getListTruyenById(@Query("theloai") int theloai, @Query("page") int page);
     @POST("/listChap.php?")
-    Call<List<ContentDTO>> getListContentByTruyen(@Query("idTruyen") int theloai, @Query("page") int page);
+    Call<ContentDTO> getListContentByTruyen(@Query("idTruyen") int idTruyen, @Query("idChap") int idChap);
 }
