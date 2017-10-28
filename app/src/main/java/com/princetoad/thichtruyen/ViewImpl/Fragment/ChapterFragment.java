@@ -1,5 +1,6 @@
 package com.princetoad.thichtruyen.ViewImpl.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ public class ChapterFragment extends Fragment{
     private AdapterListChap adapter;
     private List<Integer> list;
 
+    @SuppressLint("ValidFragment")
     public ChapterFragment(int listSize){
         mListSize = listSize;
         list = new ArrayList<>();
@@ -42,6 +44,7 @@ public class ChapterFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chapter_fragment, container, false);
+
         listChap = (ListView) view.findViewById(R.id.list_chap);
         adapter = new AdapterListChap(getContext(), list);
         listChap.setAdapter(adapter);

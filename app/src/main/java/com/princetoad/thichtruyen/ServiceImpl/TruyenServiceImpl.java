@@ -3,6 +3,7 @@ package com.princetoad.thichtruyen.ServiceImpl;
 import android.util.Log;
 
 import com.princetoad.thichtruyen.Common.Constant;
+import com.princetoad.thichtruyen.Common.Domain.CommentDTO;
 import com.princetoad.thichtruyen.Common.Domain.ContentDTO;
 import com.princetoad.thichtruyen.Common.Domain.TruyenDTO;
 import com.princetoad.thichtruyen.Common.RetrofitRequest;
@@ -80,6 +81,31 @@ public class TruyenServiceImpl implements TruyenService{
 
             @Override
             public void onFailure(Call<ContentDTO> call, Throwable t) {
+                callback.onFail(Constant.ERROR.CONNECT_ERROR);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void getCommentByTruyen(int idTruyen, int page, final ListDataCallback<CommentDTO> callback) {
+        request.getCommetTruyenById(idTruyen, page).enqueue(new Callback<List<CommentDTO>>() {
+            @Override
+            public void onResponse(Call<List<CommentDTO>> call, Response<List<CommentDTO>> response) {
+                if (response.isSuccessful()){
+                    callback.onSuccess(response.body());
+                } else {
+                    try {
+                        callback.onFail("Có lỗi xảy ra !");
+                        Log.e("error", response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CommentDTO>> call, Throwable t) {
                 callback.onFail(Constant.ERROR.CONNECT_ERROR);
                 t.printStackTrace();
             }

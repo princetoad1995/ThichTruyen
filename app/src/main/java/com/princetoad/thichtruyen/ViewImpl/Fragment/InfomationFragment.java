@@ -1,5 +1,6 @@
 package com.princetoad.thichtruyen.ViewImpl.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,9 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.princetoad.thichtruyen.Common.Constant;
 import com.princetoad.thichtruyen.Common.Domain.TruyenDTO;
-import com.princetoad.thichtruyen.Common.TypeUtil;
+import com.princetoad.thichtruyen.Common.Util;
 import com.princetoad.thichtruyen.R;
 import com.princetoad.thichtruyen.View.InfomationView;
 import com.squareup.picasso.Picasso;
@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
  * Created by PRINCETOAD on 09/10/2017.
  */
 
+@SuppressLint("ValidFragment")
 public class InfomationFragment extends Fragment implements InfomationView{
     private TextView title, author, number_chap, genres, description, countSee, countLike;
     private ImageView img_info;
@@ -47,12 +48,14 @@ public class InfomationFragment extends Fragment implements InfomationView{
         countSee = (TextView) view.findViewById(R.id.count_see_info);
         countLike = (TextView) view.findViewById(R.id.count_like_info);
 
+//        Util.hideKeyboard(g);
+
         title.setText(truyenDTO.getTen());
         author.setText(truyenDTO.getTacgia());
         number_chap.setText(truyenDTO.getSochuong() + "");
-        genres.setText(TypeUtil.getType(getContext(), truyenDTO));
+        genres.setText(Util.getType(getContext(), truyenDTO));
         description.setText(truyenDTO.getMota());
-        Picasso.with(getContext()).load(truyenDTO.getAnhbia()).into(img_info);
+        Picasso.with(getContext()).load(truyenDTO.getAnhbia()).fit().centerCrop().into(img_info);
         countSee.setText(truyenDTO.getLuotxem() + "");
         countLike.setText(truyenDTO.getYeuthich() + "");
         return view;
