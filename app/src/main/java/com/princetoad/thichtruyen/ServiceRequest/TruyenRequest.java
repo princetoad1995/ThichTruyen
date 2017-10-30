@@ -19,7 +19,7 @@ public interface TruyenRequest {
     @POST("/listTruyen.php?")
     Call<List<TruyenDTO>> getListTruyenById(@Query("theloai") int theloai, @Query("page") int page);
     @POST("/listChap.php?")
-    Call<ContentDTO> getListContentByTruyen(@Query("idTruyen") int idTruyen, @Query("idChap") int idChap);
+    Call<List<ContentDTO>> getListContentByTruyen(@Query("idTruyen") int idTruyen, @Query("idChap") int idChap);
     @POST("/listComment.php?")
     Call<List<CommentDTO>> getCommetTruyenById(@Query("idTruyen") int idTruyen, @Query("page") int page);
 }

@@ -15,7 +15,7 @@ public class ContentDTO extends BaseDTO implements Serializable{
     private int idTruyen;
     @SerializedName("idChap")
     private int idChap;
-    @SerializedName("content")
+    @SerializedName("noidung")
     private String content;
 
     public ContentDTO() {

@@ -34,4 +34,9 @@ public class Constant {
         public static final int THAMKIN = 11;
         public static final int KINHDI = 12;
     }
+
+    public static class INFO_BOOK{
+        public static final String ID_BOOK = "idBook";
+        public static final String ID_CHAP = "idChap";
+    }
 }

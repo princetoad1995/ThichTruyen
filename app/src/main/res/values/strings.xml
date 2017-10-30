@@ -35,5 +35,6 @@
     <string name="descripption">Mô tả</string>
     <string name="count_see">Lượt xem</string>
     <string name="count_like">Lượt thích</string>
-    <string name="write">Viết bình luận...</string>
+    <string name="write">Viết cảm nhận...</string>
+    <string name="isLoading">Đang tải dữ liệu</string>
 </resources>

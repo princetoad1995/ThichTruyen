@@ -1,15 +1,21 @@
 package com.princetoad.thichtruyen.ViewImpl.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.princetoad.thichtruyen.Common.Util;
 import com.princetoad.thichtruyen.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -23,6 +29,7 @@ public class CommentFragment extends Fragment{
     private CircleImageView img_ava;
     private EditText edtComment;
     private ListView recyclerCmt;
+    private LinearLayout linerComment;
 
     public CommentFragment(){
 
@@ -40,9 +47,9 @@ public class CommentFragment extends Fragment{
         swipeComment = (SwipeRefreshLayout) view.findViewById(R.id.swipe_comment);
         edtComment = (EditText) view.findViewById(R.id.edt_cmt);
         recyclerCmt = (ListView) view.findViewById(R.id.listview_cmt);
+        linerComment = (LinearLayout) view.findViewById(R.id.liner_comment);
 
         return view;
     }
-
 
 }

@@ -63,16 +63,16 @@ public class TruyenServiceImpl implements TruyenService{
     }
 
     @Override
-    public void getContentByTruyen(int idTruyen, int idChap, final DataCallback<ContentDTO> callback) {
-        request.getListContentByTruyen(idTruyen, idChap).enqueue(new Callback<ContentDTO>() {
+    public void getContentByTruyen(int idTruyen, int idChap, final ListDataCallback<ContentDTO> callback) {
+        request.getListContentByTruyen(idTruyen, idChap).enqueue(new Callback<List<ContentDTO>>() {
             @Override
-            public void onResponse(Call<ContentDTO> call, Response<ContentDTO> response) {
+            public void onResponse(Call<List<ContentDTO>> call, Response<List<ContentDTO>> response) {
                 if (response.isSuccessful()){
                     callback.onSuccess(response.body());
                 } else {
                     try {
                         callback.onFail("Có lỗi xảy ra !");
-                        Log.e("error", response.errorBody().string());
+                        Log.e("error_logic", response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -80,7 +80,7 @@ public class TruyenServiceImpl implements TruyenService{
             }
 
             @Override
-            public void onFailure(Call<ContentDTO> call, Throwable t) {
+            public void onFailure(Call<List<ContentDTO>> call, Throwable t) {
                 callback.onFail(Constant.ERROR.CONNECT_ERROR);
                 t.printStackTrace();
             }

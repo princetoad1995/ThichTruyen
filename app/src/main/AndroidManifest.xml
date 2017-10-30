@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewImpl.IntroductionBook"></activity>
+        <activity android:name=".ViewImpl.IntroductionBook" />
+        <activity android:name=".ViewImpl.ContentActivity"></activity>
     </application>
 
 </manifest>
