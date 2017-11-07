@@ -62,6 +62,7 @@ public class ChapterFragment extends Fragment{
                 Intent i = new Intent(getContext(), ContentActivity.class);
                 i.putExtra(Constant.INFO_BOOK.ID_BOOK, mIdTruyen);
                 i.putExtra(Constant.INFO_BOOK.ID_CHAP, position + 1);
+                i.putExtra(Constant.INFO_BOOK.NUMBER_CHAP, mListSize);
                 startActivity(i);
             }
         });

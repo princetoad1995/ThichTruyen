@@ -38,5 +38,6 @@ public class Constant {
     public static class INFO_BOOK{
         public static final String ID_BOOK = "idBook";
         public static final String ID_CHAP = "idChap";
+        public static final String NUMBER_CHAP = "numberChap";
     }
 }

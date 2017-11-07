@@ -33,8 +33,15 @@ public class IntroductionBook extends AppCompatActivity {
         truyenDTO = (TruyenDTO) i.getSerializableExtra(Constant.BOOK);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(truyenDTO.getTen());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);

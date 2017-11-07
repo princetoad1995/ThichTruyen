@@ -79,6 +79,7 @@ public class InfomationFragment extends Fragment implements InfomationView{
                 Intent i = new Intent(getContext(), ContentActivity.class);
                 i.putExtra(Constant.INFO_BOOK.ID_BOOK, truyenDTO.getId());
                 i.putExtra(Constant.INFO_BOOK.ID_CHAP, 1);
+                i.putExtra(Constant.INFO_BOOK.NUMBER_CHAP, truyenDTO.getSochuong());
                 startActivity(i);
             }
         });
