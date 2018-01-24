@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,8 +25,7 @@ import com.princetoad.thichtruyen.View.BaseView;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     private ProgressDialogImpl pDialog = null;
-    protected ImageView btn_info_back_toolbar;
-    protected TextView title_toolbar;
+    private Toolbar toolbar;
 
 
     public void showLoadingDialog(String title) {
@@ -93,17 +93,19 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 //        }
     }
 
-    public void setToolbar(String s) {
-        btn_info_back_toolbar = (ImageView) findViewById(R.id.btn_info_back_toolbar);
-        title_toolbar = (TextView) findViewById(R.id.title_toolbar);
-
-        btn_info_back_toolbar.setOnClickListener(new View.OnClickListener() {
+    protected void setToolbar(String name) {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(name);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 finish();
             }
         });
-        title_toolbar.setText(s);
     }
+
 
 }

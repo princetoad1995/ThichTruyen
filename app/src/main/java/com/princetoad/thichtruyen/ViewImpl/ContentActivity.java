@@ -70,6 +70,16 @@ public class ContentActivity extends BaseActivity implements ContentView{
         });
     }
 
+    @Override
+    public void showLayoutErr() {
+
+    }
+
+    @Override
+    public void hideLayoutErr() {
+
+    }
+
     class MyGesture extends GestureDetector.SimpleOnGestureListener{
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {

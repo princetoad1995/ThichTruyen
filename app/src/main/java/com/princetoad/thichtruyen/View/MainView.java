@@ -1,6 +1,7 @@
 package com.princetoad.thichtruyen.View;
 
 import com.princetoad.thichtruyen.Common.Domain.TruyenDTO;
+import com.princetoad.thichtruyen.Common.Domain.TypeDTO;
 
 import java.util.List;
 
@@ -9,8 +10,5 @@ import java.util.List;
  */
 
 public interface MainView extends BaseView{
-    public void setListBook(List<TruyenDTO> list);
-    public void setMoreListBook(List<TruyenDTO> list);
-    public int getPage();
-    public int getType();
+    public void setListType(List<TypeDTO> listType);
 }

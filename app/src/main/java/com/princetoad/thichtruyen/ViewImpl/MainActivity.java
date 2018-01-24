@@ -9,16 +9,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.GridView;
 
-import com.princetoad.thichtruyen.Common.Adapter.AdapterListBook;
-import com.princetoad.thichtruyen.Common.Constant;
-import com.princetoad.thichtruyen.Common.Domain.TruyenDTO;
+import com.princetoad.thichtruyen.Common.Adapter.AdapterListType;
+import com.princetoad.thichtruyen.Common.Domain.TypeDTO;
 import com.princetoad.thichtruyen.Presenter.MainPresenter;
 import com.princetoad.thichtruyen.PresenterImpl.MainPresenterImpl;
 import com.princetoad.thichtruyen.R;
@@ -28,40 +25,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainView {
+        implements NavigationView.OnNavigationItemSelectedListener, MainView{
 
     private MainPresenter controller;
-    private List<TruyenDTO> truyenDTOList;
-    private ListView list_book;
-    private AdapterListBook adapter;
+    private GridView gridView;
     private final static String TAG = MainActivity.class.getSimpleName();
-    private int pageCount = 1, type = Constant.TYPE.NGONTINH, kt = 0;
-    private SwipeRefreshLayout mRefeshTruyen;
+    private AdapterListType adapter;
+    private View layoutErr;
+    private List<TypeDTO> listType;
+    private SwipeRefreshLayout mRefesh;
+    private int kt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        truyenDTOList = new ArrayList<>();
-        list_book = (ListView) findViewById(R.id.list_book);
-        mRefeshTruyen = (SwipeRefreshLayout) findViewById(R.id.refesh_list_truyen);
-        mRefeshTruyen.setColorScheme(android.R.color.holo_orange_light,
-                android.R.color.holo_blue_light,
-                android.R.color.holo_green_light,
-                android.R.color.holo_red_light);
+        listType = new ArrayList<>();
+        gridView = (GridView) findViewById(R.id.gridView);
+        layoutErr = findViewById(R.id.layout_err_main);
         controller = new MainPresenterImpl(MainActivity.this);
-        controller.getListTruyen(type);
-        list_book.setOnScrollListener(onScrollListener());
-        mRefeshTruyen.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                kt = 1;
-                resetPage(type);
-            }
-        });
+        controller.getListType();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -72,7 +59,45 @@ public class MainActivity extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        control();
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(MainActivity.this, ListBookActivity.class);
+                i.putExtra("idType", listType.get(position).getId());
+                i.putExtra("typeName", listType.get(position).getTen());
+                startActivity(i);
+            }
+        });
+
+        refeshActivity();
+
+    }
+
+    private void refeshActivity(){
+        mRefesh = (SwipeRefreshLayout) findViewById(R.id.refesh_list_type);
+        mRefesh.setColorScheme(android.R.color.holo_orange_light,
+                android.R.color.holo_blue_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_red_light);
+
+        mRefesh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                kt = 1;
+                resetPage();
+            }
+        });
+
+    }
+
+    private void resetPage() {
+        listType.clear();
+        controller.getListType();
+        // refesh list
+        if (kt == 1) {
+            mRefesh.setRefreshing(false);
+            kt = 0;
+        }
     }
 
     @Override
@@ -92,11 +117,11 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.ngontinh) {
-            resetPage(Constant.TYPE.NGONTINH);
+//            resetPage(Constant.TYPE.NGONTINH);
         } else if (id == R.id.teen) {
-            resetPage(Constant.TYPE.TEEN);
+//            resetPage(Constant.TYPE.TEEN);
         } else if (id == R.id.voz) {
-            resetPage(Constant.TYPE.VOZ);
+//            resetPage(Constant.TYPE.VOZ);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -104,81 +129,24 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
-    private AbsListView.OnScrollListener onScrollListener() {
-        return new AbsListView.OnScrollListener() {
 
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int scrollState) {
-                int threshold = 1;
-                int count = list_book.getCount();
-
-                if (scrollState == SCROLL_STATE_IDLE) {
-                    if (list_book.getLastVisiblePosition() >= count - threshold) {
-                        Log.e(TAG, "loading more data");
-                        // Execute LoadMoreDataTask AsyncTask
-                        if (controller.isLoadMore()) {
-                            pageCount++;
-                            controller.loadMoreList();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
-            }
-        };
-    }
-
-    private void control() {
-        list_book.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent i = new Intent(MainActivity.this, IntroductionBook.class);
-                i.putExtra(Constant.BOOK, truyenDTOList.get(position));
-                startActivity(i);
-            }
-        });
-    }
-
-    // set listview fist
     @Override
-    public void setListBook(List<TruyenDTO> list) {
-        truyenDTOList = list;
-        adapter = new AdapterListBook(list, MainActivity.this);
-        list_book.setAdapter(adapter);
+    public void showLayoutErr() {
+        layoutErr.setVisibility(View.VISIBLE);
+        gridView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideLayoutErr() {
+        layoutErr.setVisibility(View.GONE);
+        gridView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setListType(List<TypeDTO> listType) {
+        this.listType = listType;
+        adapter = new AdapterListType(listType, MainActivity.this);
+        gridView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-    }
-
-    // load more listview
-    @Override
-    public void setMoreListBook(List<TruyenDTO> list) {
-        truyenDTOList.addAll(list);
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public int getPage() {
-        return pageCount;
-    }
-
-    @Override
-    public int getType() {
-        return type;
-    }
-
-    // resetPage when user choose new type or refesh list
-    private void resetPage(int type) {
-        this.type = type;
-        pageCount = 1;
-        controller.resetLoadMore();
-        truyenDTOList.clear();
-        controller.getListTruyen(type);
-        // refesh list
-        if (kt == 1) {
-            mRefeshTruyen.setRefreshing(false);
-            kt = 0;
-        }
     }
 }

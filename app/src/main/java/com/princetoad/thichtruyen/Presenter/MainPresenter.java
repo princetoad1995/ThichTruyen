@@ -1,6 +1,7 @@
 package com.princetoad.thichtruyen.Presenter;
 
 import com.princetoad.thichtruyen.Common.Domain.TruyenDTO;
+import com.princetoad.thichtruyen.Common.Domain.TypeDTO;
 
 import java.util.List;
 
@@ -9,8 +10,5 @@ import java.util.List;
  */
 
 public interface MainPresenter {
-    public void getListTruyen(int type);
-    public void loadMoreList();
-    public boolean isLoadMore();
-    public void resetLoadMore();
+    public void getListType();
 }

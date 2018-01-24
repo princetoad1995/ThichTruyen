@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ViewImpl.IntroductionBook" />
-        <activity android:name=".ViewImpl.ContentActivity"></activity>
+        <activity android:name=".ViewImpl.ContentActivity" />
+        <activity android:name=".ViewImpl.ListBookActivity"></activity>
     </application>
 
 </manifest>

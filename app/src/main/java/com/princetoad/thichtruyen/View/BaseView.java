@@ -14,4 +14,8 @@ public interface BaseView {
     public void hideLoadingDialog();
 
     public void showToastMessage(String message);
+
+    public void showLayoutErr();
+
+    public void hideLayoutErr();
 }

@@ -3,6 +3,7 @@ package com.princetoad.thichtruyen.ServiceRequest;
 import com.princetoad.thichtruyen.Common.Domain.CommentDTO;
 import com.princetoad.thichtruyen.Common.Domain.ContentDTO;
 import com.princetoad.thichtruyen.Common.Domain.TruyenDTO;
+import com.princetoad.thichtruyen.Common.Domain.TypeDTO;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface TruyenRequest {
     Call<List<ContentDTO>> getListContentByTruyen(@Query("idTruyen") int idTruyen, @Query("idChap") int idChap);
     @POST("/listComment.php?")
     Call<List<CommentDTO>> getCommetTruyenById(@Query("idTruyen") int idTruyen, @Query("page") int page);
+    @POST("/listType.php")
+    Call<List<TypeDTO>> getListType();
 }

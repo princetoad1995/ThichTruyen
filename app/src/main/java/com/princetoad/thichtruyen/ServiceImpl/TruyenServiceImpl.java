@@ -6,6 +6,7 @@ import com.princetoad.thichtruyen.Common.Constant;
 import com.princetoad.thichtruyen.Common.Domain.CommentDTO;
 import com.princetoad.thichtruyen.Common.Domain.ContentDTO;
 import com.princetoad.thichtruyen.Common.Domain.TruyenDTO;
+import com.princetoad.thichtruyen.Common.Domain.TypeDTO;
 import com.princetoad.thichtruyen.Common.RetrofitRequest;
 import com.princetoad.thichtruyen.Service.TruyenService;
 import com.princetoad.thichtruyen.ServiceCallback.DataCallback;
@@ -106,6 +107,31 @@ public class TruyenServiceImpl implements TruyenService{
 
             @Override
             public void onFailure(Call<List<CommentDTO>> call, Throwable t) {
+                callback.onFail(Constant.ERROR.CONNECT_ERROR);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void getListType(final ListDataCallback<TypeDTO> callback) {
+        request.getListType().enqueue(new Callback<List<TypeDTO>>() {
+            @Override
+            public void onResponse(Call<List<TypeDTO>> call, Response<List<TypeDTO>> response) {
+                if (response.isSuccessful()){
+                    callback.onSuccess(response.body());
+                } else {
+                    try {
+                        callback.onFail("Có lỗi xảy ra !");
+                        Log.d("error_thang", response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TypeDTO>> call, Throwable t) {
                 callback.onFail(Constant.ERROR.CONNECT_ERROR);
                 t.printStackTrace();
             }
