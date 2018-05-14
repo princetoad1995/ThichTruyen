@@ -43,7 +43,7 @@ public class InfomationFragment extends Fragment implements InfomationView{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.infomation_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_infomation, container, false);
 
         init(view);
         control();
@@ -76,6 +76,12 @@ public class InfomationFragment extends Fragment implements InfomationView{
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Intent i = new Intent(getContext(), ContentActivity.class);
+//                i.putExtra(Constant.INFO_BOOK.ID_BOOK, truyenDTO.getId());
+//                i.putExtra(Constant.INFO_BOOK.ID_CHAP, 1);
+//                i.putExtra(Constant.INFO_BOOK.NUMBER_CHAP, truyenDTO.getSochuong());
+//                startActivity(i);
+
                 Intent i = new Intent(getContext(), ContentActivity.class);
                 i.putExtra(Constant.INFO_BOOK.ID_BOOK, truyenDTO.getId());
                 i.putExtra(Constant.INFO_BOOK.ID_CHAP, 1);

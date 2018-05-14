@@ -15,6 +15,8 @@ public class ContentDTO extends BaseDTO implements Serializable{
     private int idTruyen;
     @SerializedName("idChap")
     private int idChap;
+    @SerializedName("tenChap")
+    private String tenChap;
     @SerializedName("noidung")
     private String content;
 
@@ -51,5 +53,13 @@ public class ContentDTO extends BaseDTO implements Serializable{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getTenChap() {
+        return tenChap;
+    }
+
+    public void setTenChap(String tenChap) {
+        this.tenChap = tenChap;
     }
 }

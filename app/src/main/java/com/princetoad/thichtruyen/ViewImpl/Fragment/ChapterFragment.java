@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 import com.princetoad.thichtruyen.Common.Adapter.AdapterListChap;
 import com.princetoad.thichtruyen.Common.Constant;
-import com.princetoad.thichtruyen.Common.Util;
 import com.princetoad.thichtruyen.R;
 import com.princetoad.thichtruyen.ViewImpl.ContentActivity;
 
@@ -50,7 +49,7 @@ public class ChapterFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.chapter_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_chapter, container, false);
 
         listChap = (ListView) view.findViewById(R.id.list_chap);
         adapter = new AdapterListChap(getContext(), list);

@@ -17,12 +17,24 @@ import retrofit2.http.Query;
  */
 
 public interface TruyenRequest {
-    @POST("/listTruyen.php?")
+    @POST("/listTruyen.php")
     Call<List<TruyenDTO>> getListTruyenById(@Query("theloai") int theloai, @Query("page") int page);
-    @POST("/listChap.php?")
+
+    @POST("/listChap.php")
     Call<List<ContentDTO>> getListContentByTruyen(@Query("idTruyen") int idTruyen, @Query("idChap") int idChap);
-    @POST("/listComment.php?")
+
+    @POST("/listComment.php")
     Call<List<CommentDTO>> getCommetTruyenById(@Query("idTruyen") int idTruyen, @Query("page") int page);
+
     @POST("/listType.php")
     Call<List<TypeDTO>> getListType();
+
+    @POST("/searchTruyen.php")
+    Call<List<TruyenDTO>> getSearchListTruyen(@Query("search") String search, @Query("page") int page);
+
+    @POST("/updateLuotxem.php")
+    Call<String> updateLuotxem(@Query("idTruyen") int id);
+
+    @POST("/updateYeuthic.php")
+    Call<String> updateYeuthich(@Query("idTruyen") int id);
 }

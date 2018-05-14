@@ -10,10 +10,11 @@
     </style>
 
     <style name="CustomDialog" parent="@android:style/Theme.Dialog">
-        <item name="android:background">@color/colorTextGray</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="android:windowFrame">@null</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:background">@color/colorWhile</item>
+        <item name="android:indeterminateDrawable">@drawable/circular_progress_dialog</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

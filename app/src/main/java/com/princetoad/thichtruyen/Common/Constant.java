@@ -12,6 +12,11 @@ public class Constant {
         public static final int CONNECT_TIME_OUT = 100;
     }
 
+    public static class RESULT_REQUEST{
+        public static final String OK = "OK";
+        public static final String ERROR = "ERROR";
+    }
+
     public static class ERROR {
         public static final int NO_ANSWER = 401;
         public static final int CONFLICT = 409;
@@ -39,5 +44,7 @@ public class Constant {
         public static final String ID_BOOK = "idBook";
         public static final String ID_CHAP = "idChap";
         public static final String NUMBER_CHAP = "numberChap";
+        public static final String CONTENT_CHAP = "contentChap";
+        public static final String NAME_CHAP = "nameChap";
     }
 }

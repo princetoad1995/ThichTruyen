@@ -13,12 +13,11 @@ public class ProgressDialogImpl {
     private ProgressDialog pDialog = null;
 
     public ProgressDialogImpl(Context context) {
-        this.pDialog = new ProgressDialog(context, R.style.CustomDialog);
+        this.pDialog = new ProgressDialog(context);
     }
 
     public void showLoadingDialog(String message) {
         pDialog.setMessage(message);
-        pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pDialog.show();
         pDialog.setCancelable(false);
     }

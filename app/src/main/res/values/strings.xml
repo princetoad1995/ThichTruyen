@@ -37,4 +37,6 @@
     <string name="count_like">Lượt thích</string>
     <string name="write">Viết cảm nhận...</string>
     <string name="isLoading">Đang tải dữ liệu</string>
+    <string name="facebook_app_id">451418528595990</string>
+    <string name="fb_login_protocol_scheme">fb451418528595990</string>
 </resources>

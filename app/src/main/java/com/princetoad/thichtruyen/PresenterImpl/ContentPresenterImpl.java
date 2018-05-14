@@ -28,18 +28,20 @@ public class ContentPresenterImpl implements ContentPresenter {
 
     @Override
     public void getContent() {
-        view.showLoadingDialog("Đang tải dữ liệu");
+//        view.showLoadingDialog("Đang tải dữ liệu");
         service.getContentByTruyen(view.getTruyenId(), view.getChapId(), new ListDataCallback<ContentDTO>() {
             @Override
             public void onSuccess(List<ContentDTO> data) {
                 view.setContent(data.get(0));
-                view.hideLoadingDialog();
+//                view.hideLoadingDialog();
+                view.hideLayoutErr();
             }
 
             @Override
             public void onFail(String error) {
                 view.showMessage(error);
-                view.hideLoadingDialog();
+//                view.hideLoadingDialog();
+                view.showLayoutErr();
             }
         });
     }
